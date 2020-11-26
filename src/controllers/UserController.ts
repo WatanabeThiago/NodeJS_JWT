@@ -1,10 +1,10 @@
 import { Request, Response} from 'express'
-import { getRepository } from 'typeorm'
+import { getConnection, getRepository } from 'typeorm'
 import User from '../database/entity/User'
 
 class UserController {
     async index (req: Request, res:Response ){
-        return res.send({ userId: req.user_id})
+        return res.send({ user_id: req.userId})
 
     }
     async create(req:Request, res: Response) {
@@ -22,6 +22,20 @@ class UserController {
 
 
         return res.json(user)
+    }
+    async delete(req: Request, res: Response) {
+        const user_id = req.userId
+        
+        console.log(user_id)
+        const user = await getConnection()
+        .createQueryBuilder()
+        .delete()
+        .from(User)
+        .where({ user_id})
+        .execute()
+
+        console.log('Deletado')
+        res.send(`Usuario deletado com sucesso.`)
     }
 
 

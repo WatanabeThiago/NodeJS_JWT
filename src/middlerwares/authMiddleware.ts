@@ -21,7 +21,7 @@ export default function authMiddleware(req: Request, res: Response, next: NextFu
         const { id } = data as TokenPayLoad
 
 
-        req.user_id = id;
+        req.userId = id;
 
         return next()
     }

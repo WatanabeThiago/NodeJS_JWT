@@ -10,6 +10,7 @@ const router = Router()
 
 router.post('/users', UserController.create)
 router.get('/users', authMiddleware, UserController.index)
+router.delete('/users', authMiddleware, UserController.delete)
 router.post('/login', AuthController.authenticate)
 
 
